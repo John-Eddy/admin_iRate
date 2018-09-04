@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticlesRepository")
@@ -39,11 +41,6 @@ class Articles
     private $designation;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $slug;
-
-    /**
      * @ORM\Column(type="float", nullable=true)
      */
     private $price;
@@ -68,8 +65,14 @@ class Articles
      */
     private $marks;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+
     public function __construct()
     {
+        $this->created_date = new \DateTime();
         $this->scans = new ArrayCollection();
         $this->marks = new ArrayCollection();
     }
@@ -123,18 +126,6 @@ class Articles
     public function setDesignation(string $designation): self
     {
         $this->designation = $designation;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -233,6 +224,22 @@ class Articles
                 $mark->setArticleId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function __toString() {
+        return $this->id . " - " . $this->designation;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

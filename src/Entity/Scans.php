@@ -36,6 +36,11 @@ class Scans
      */
     private $raters_id;
 
+    public function __construct()
+    {
+        $this->created_date = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

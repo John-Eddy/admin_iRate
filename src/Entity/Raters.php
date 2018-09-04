@@ -43,12 +43,18 @@ class Raters
      */
     private $marks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Scans", mappedBy="raters_id")
+     */
+    private $scans;
+
 
     public function __construct()
     {
         $this->a = new ArrayCollection();
         $this->marks = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->scans = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,6 +139,39 @@ class Raters
         }
     }
 
+    /**
+     * @return Collection|Scans[]
+     */
+    public function getScans(): Collection
+    {
+        return $this->scans;
+    }
 
+    public function addScan(Scans $scan): self
+    {
+        if (!$this->scans->contains($scan)) {
+            $this->scans[] = $scan;
+            $scan->setRatersId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScan(Scans $scan): self
+    {
+        if ($this->scans->contains($scan)) {
+            $this->scans->removeElement($scan);
+            // set the owning side to null (unless already changed)
+            if ($scan->getRatersId() === $this) {
+                $scan->setRatersId(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString() {
+            return $this->id . " - " . $this->firstname . " " . $this->lastname;
+    }
 
 }

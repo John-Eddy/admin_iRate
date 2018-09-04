@@ -31,6 +31,11 @@ class Scans
      */
     private $created_date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Raters", inversedBy="scans")
+     */
+    private $raters_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +73,18 @@ class Scans
     public function setCreatedDate(\DateTimeInterface $created_date): self
     {
         $this->created_date = $created_date;
+
+        return $this;
+    }
+
+    public function getRatersId(): ?Raters
+    {
+        return $this->raters_id;
+    }
+
+    public function setRatersId(?Raters $raters_id): self
+    {
+        $this->raters_id = $raters_id;
 
         return $this;
     }

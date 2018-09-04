@@ -14,8 +14,14 @@
     </head>
     <body>
         {% include './layout/header.html.twig' %}
-        {% include './layout/sidebar.html.twig' %}
-        {% block body %}{% endblock %}
+        <div id="wrapper">
+            {% include './layout/sidebar.html.twig' %}
+            <div id="content-wrapper">
+                <div class="container-fluid">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
         {% include './script.html.twig' %}
 
     {% block javascripts %}{% endblock %}

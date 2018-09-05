@@ -1,0 +1,65 @@
+#easy_admin:
+#    entities:
+#        # List the entity class name you want to manage
+#        - App\Entity\Product
+#        - App\Entity\Category
+#        - App\Entity\User
+# app/config/config.yml
+easy_admin:
+    site_name: 'Admin <em style="font-size: 25px;">i<em style="color:#FEEC34;">R</em>ate</em> '
+    entities:
+        Articles:
+            class: App\Entity\Articles
+            form:
+                fields:
+                    - 'code'
+                    - 'designation'
+                    - 'price'
+                    - { property: 'image_url', type: 'file', label: 'Image' }
+                    - { property: 'active',  label: 'Actif' }
+        Marks:
+            class: App\Entity\Marks
+            form:
+                fields:
+                    -  { property: 'article_id', label: 'Article' }
+                    -  { property: 'rater_id', label: 'Rater' }
+                    -  { property: 'mark', label: 'Note', type: choice, type_options: { choices: {'1': 1, '2': 2, '3': 3, '4': 4, '5': 5 }}}
+                    -  { property: 'title', label: 'Titre' }
+                    -  { property: 'text', label: 'Commentaire'  }
+        Scans:
+            class: App\Entity\Scans
+            form:
+                fields:
+                - { property: 'article_id', label: 'Article' }
+                - { property: 'raters_id', label: 'Rater' }
+                - { property: 'code', label: 'Code' }
+
+        Brands:
+            class: App\Entity\Brands
+            form:
+                fields:
+                    - 'label'
+        Categories:
+            class: App\Entity\Categories
+            form:
+                fields:
+                    - { property: 'parent_id', label: 'Catégorie parente'}
+                    - 'label'
+                    - { property: 'active', label: 'Actif', checked: 2 }
+        Raters:
+            class: App\Entity\Raters
+            form:
+                fields:
+                - { property: 'firstname', label: 'Prénom'}
+                - { property: 'lastname', label: 'Nom'}
+                - { property: 'email', label: 'Email'}
+                - { property: 'active', label: 'Actif'}
+    design:
+        brand_color: '#333'
+        color_scheme: 'light'
+        menu:
+            - { entity: 'Articles', label: 'Articles', icon: 'beer'}
+            - { entity: 'Scans', label: 'Scans', icon: 'barcode'}
+            - { entity: 'Raters', label: 'Raters', icon: 'users'}
+            - { entity: 'Categories', label: 'Catégories', icon: 'tag' }
+            - { entity: 'Brands', label: 'Marques', icon: 'magic' }

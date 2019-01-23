@@ -185,6 +185,14 @@ class Articles
         return $this;
     }
 
+    public function removeScans(): self
+    {
+        $this->scans = new ArrayCollection();
+
+        return $this;
+    }
+
+
     public function getCreatedDate(): ?\DateTimeInterface
     {
         return $this->created_date;

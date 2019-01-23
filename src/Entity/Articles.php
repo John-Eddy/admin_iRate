@@ -21,9 +21,9 @@ class Articles
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Brands", inversedBy="articles")
+     * @ORM\Column(type="string", length=255)
      */
-    private $brand_id;
+    private $brand;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categories", inversedBy="e")
@@ -51,7 +51,7 @@ class Articles
     private $image_url;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Scans", mappedBy="article_id")
+     * @ORM\OneToMany(targetEntity="App\Entity\Scans", mappedBy="article_id", cascade={"persist"})
      */
     private $scans;
 
@@ -82,14 +82,14 @@ class Articles
         return $this->id;
     }
 
-    public function getBrandId(): ?Brands
+    public function getBrand(): ? string
     {
-        return $this->brand_id;
+        return $this->brand;
     }
 
-    public function setBrandId(?Brands $brand_id): self
+    public function setBrand(string $brand): self
     {
-        $this->brand_id = $brand_id;
+        $this->brand = $brand;
 
         return $this;
     }

@@ -29,3 +29,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    app.service.api_data_adapter:
+        class: App\Services\ApiDataAdapter
+        arguments: ['@doctrine.orm.entity_manager']

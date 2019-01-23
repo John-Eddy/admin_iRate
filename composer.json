@@ -17,6 +17,7 @@
         "symfony/lts": "^4@dev",
         "symfony/orm-pack": "^1.0",
         "symfony/security-csrf": "^4.0",
+        "symfony/serializer": "^4.0",
         "symfony/validator": "^4.0",
         "symfony/yaml": "^4.0"
     },

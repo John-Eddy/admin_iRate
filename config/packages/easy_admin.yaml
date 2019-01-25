@@ -46,20 +46,21 @@ easy_admin:
                     - { property: 'parent_id', label: 'Catégorie parente'}
                     - 'label'
                     - { property: 'active', label: 'Actif', checked: 2 }
-        Raters:
-            class: App\Entity\Raters
+        User:
+            class: App\Entity\User
             form:
                 fields:
-                - { property: 'firstname', label: 'Prénom'}
-                - { property: 'lastname', label: 'Nom'}
+                #- { property: 'firstname', label: 'Prénom'}
+                #- { property: 'lastname', label: 'Nom'}
                 - { property: 'email', label: 'Email'}
-                - { property: 'active', label: 'Actif'}
+
+                #- { property: 'active', label: 'Actif'}
     design:
         brand_color: '#333'
         color_scheme: 'light'
         menu:
             - { entity: 'Articles', label: 'Articles', icon: 'beer'}
             - { entity: 'Scans', label: 'Scans', icon: 'barcode'}
-            - { entity: 'Raters', label: 'Raters', icon: 'users'}
+            - { entity: 'User', label: 'Utilisateurs', icon: 'users'}
             - { entity: 'Categories', label: 'Catégories', icon: 'tag' }
             - { entity: 'Brands', label: 'Marques', icon: 'magic' }

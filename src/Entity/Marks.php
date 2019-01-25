@@ -17,16 +17,10 @@ class Marks
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Raters", inversedBy="marks")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $rater_id;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Articles", inversedBy="marks")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $article_id;
+    private $article;
 
     /**
      * @ORM\Column(type="smallint")
@@ -48,21 +42,15 @@ class Marks
      */
     private $text;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="marks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getRaterId(): ?Raters
-    {
-        return $this->rater_id;
-    }
-
-    public function setRaterId(?Raters $rater_id): self
-    {
-        $this->rater_id = $rater_id;
-
-        return $this;
     }
 
     public function getArticleId(): ?Articles
@@ -121,6 +109,18 @@ class Marks
     public function setText(?string $text): self
     {
         $this->text = $text;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

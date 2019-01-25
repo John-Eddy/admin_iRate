@@ -19,7 +19,7 @@ class Scans
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Articles", inversedBy="scans")
      */
-    private $article_id;
+    private $article;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -32,9 +32,9 @@ class Scans
     private $created_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Raters", inversedBy="scans")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="Scans")
      */
-    private $raters_id;
+    private $user;
 
     public function __construct()
     {
@@ -82,14 +82,14 @@ class Scans
         return $this;
     }
 
-    public function getRatersId(): ?Raters
+    public function getUser(): ?User
     {
-        return $this->raters_id;
+        return $this->user;
     }
 
-    public function setRatersId(?Raters $raters_id): self
+    public function setUser(?User $user): self
     {
-        $this->raters_id = $raters_id;
+        $this->user = $user;
 
         return $this;
     }

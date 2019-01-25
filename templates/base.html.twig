@@ -8,6 +8,8 @@
 
         <title>{% block title %}Welcome!{% endblock %}</title>
 
+        <link  rel="stylesheet" type="text/css" href="{{ asset('assets/css/admin.css') }}">
+
         {% include './style.html.twig' %}
         {% block stylesheets %}{% endblock %}
 
@@ -15,7 +17,7 @@
     <body>
         {% include './layout/header.html.twig' %}
         <div id="wrapper">
-            {% include './layout/sidebar.html.twig' %}
+            
             <div id="content-wrapper">
                 <div class="container-fluid">
                     {% block body %}{% endblock %}

@@ -51,7 +51,7 @@ class Articles
     private $image_url;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Scans", mappedBy="article_id", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Scans", mappedBy="article", cascade={"persist"})
      */
     private $scans;
 
@@ -61,7 +61,7 @@ class Articles
     private $created_date;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Marks", mappedBy="article_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Marks", mappedBy="article", orphanRemoval=true)
      */
     private $marks;
 
@@ -166,7 +166,7 @@ class Articles
     {
         if (!$this->scans->contains($scan)) {
             $this->scans[] = $scan;
-            $scan->setArticleId($this);
+            $scan->setArticle($this);
         }
 
         return $this;

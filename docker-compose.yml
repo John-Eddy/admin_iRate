@@ -1,0 +1,30 @@
+version: '2'
+services:
+  apache-php:
+    image: trilations/symfony4
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html/
+    network_mode: host
+    environment:
+      APACHE_LOG_DIR: /var/www/html/logs
+    
+  db:    
+      image: mysql:5.7
+      environment:
+        MYSQL_DATABASE: irate
+        MYSQL_ROOT_PASSWORD: "root"
+      ports:
+        - "3306:3306"
+      volumes:
+        - "./docker/ressources/sql:/var/lib/mysql/"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+        - db
+    environment:
+        PMA_ARBITRARY: 1
+        MYSQL_ROOT_PASSWORD: "root"
+    ports:
+        - "81:80"

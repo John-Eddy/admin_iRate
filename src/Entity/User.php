@@ -21,6 +21,11 @@ class User implements UserInterface
      */
     private $id;
 
+     /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     */
+    private $pseudo;
+
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
@@ -36,6 +41,11 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_date;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Scans", mappedBy="user")
@@ -66,6 +76,30 @@ class User implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->$pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->email = $pseudo;
+
+        return $this;
+    }
+
+    public function getCreatedDate(): ?\DateTimeInterface
+    {
+        return $this->created_date;
+    }
+
+    public function setCreatedDate(\DateTimeInterface $created_date): self
+    {
+        $this->created_date = $created_date;
 
         return $this;
     }

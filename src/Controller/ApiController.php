@@ -14,6 +14,7 @@ use GuzzleHttp\Client;
 use App\Service\ApiDataAdapter;
 use App\Service\ApiResponseChecker;
 use App\Entity\Articles;
+use App\Entity\User;
 use App\Entity\Scans;
 
 
@@ -90,6 +91,34 @@ class ApiController extends AbstractController
             ['Content-type' => 'application/json']
             );
         return $response;
+    }
+
+     /**
+     * @Route("/login/{email}", name="login", methods={"GET"})
+     */
+    public function login($email) {
+
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(array(
+                'email' => $email,
+            ));
+
+        if ($user) {
+            $response = new Response(
+                $this->serializer->serialize($user, 'json'),
+                Response::HTTP_OK,
+                ['Content-type' => 'application/json']
+            );
+        } else {
+            $response = new Response(
+                $this->serializer->serialize($user, 'json'),
+                Response::HTTP_N,
+                ['Content-type' => 'application/json']
+            );
+        }
+        
+    return $response;
     }
 
 }

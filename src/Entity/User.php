@@ -57,11 +57,23 @@ class User implements UserInterface
      */
     private $marks;
 
+
+    /**
+     * Gets triggered only on insert
+
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
+    }
+
     public function __construct()
     {
         $this->Scans = new ArrayCollection();
         $this->marks = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -82,7 +94,7 @@ class User implements UserInterface
 
     public function getPseudo(): ?string
     {
-        return $this->$pseudo;
+        return $this->pseudo;
     }
 
     public function setPseudo(string $pseudo): self

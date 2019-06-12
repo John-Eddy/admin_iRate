@@ -100,9 +100,9 @@ class ApiController extends AbstractController
 
         $user = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findOneBy(array(
+            ->findOneBy([
                 'email' => $email,
-            ));
+            ]);
 
         if ($user) {
             $response = new Response(
@@ -112,8 +112,8 @@ class ApiController extends AbstractController
             );
         } else {
             $response = new Response(
-                $this->serializer->serialize($user, 'json'),
-                Response::HTTP_N,
+                'Email inconnue',
+                Response::HTTP_NOT_FOUND,
                 ['Content-type' => 'application/json']
             );
         }
